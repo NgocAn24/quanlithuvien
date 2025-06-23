@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm thử Hệ thống Quản lý Thư viện</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+        }
+        
+        .test-section h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        .test-case {
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 4px solid #2196F3;
+            background-color: #f9f9f9;
+        }
+        
+        .test-case.passed {
+            border-left-color: #4CAF50;
+            background-color: #e8f5e8;
+        }
+        
+        .test-case.failed {
+            border-left-color: #f44336;
+            background-color: #ffeaea;
+        }
+        
+        .test-case.warning {
+            border-left-color: #ff9800;
+            background-color: #fff3e0;
+        }
+        
+        .test-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .test-description {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .test-result {
+            font-weight: bold;
+        }
+        
+        .test-result.pass {
+            color: #4CAF50;
+        }
+        
+        .test-result.fail {
+            color: #f44336;
+        }
+        
+        .test-result.warning {
+            color: #ff9800;
+        }
+        
+        .run-tests-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        
+        .run-tests-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .summary {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .summary h3 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+        
+        .test-data {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        
+        .clear-data-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        .clear-data-btn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>🧪 Kiểm thử Hệ thống Quản lý Thư viện</h1>
+
+        <div class="summary" id="summary">
+            <h3>Tóm tắt kết quả kiểm thử</h3>
+            <p>Nhấn "Chạy tất cả kiểm thử" để bắt đầu</p>
+        </div>
+
+        <button class="run-tests-btn" onclick="runAllTests()">🚀 Chạy tất cả kiểm thử</button>
+        <button class="clear-data-btn" onclick="clearAllData()">🗑️ Xóa dữ liệu test</button>
+
+        <!-- Test Section: DataStore Basic Operations -->
+        <div class="test-section">
+            <h2>📊 Kiểm thử DataStore - Các thao tác cơ bản</h2>
+            <div id="datastore-tests"></div>
+        </div>
+
+        <!-- Test Section: Book Management -->
+        <div class="test-section">
+            <h2>📚 Kiểm thử Quản lý Sách</h2>
+            <div id="book-tests"></div>
+        </div>
+
+        <!-- Test Section: Reader Management -->
+        <div class="test-section">
+            <h2>👥 Kiểm thử Quản lý Độc giả</h2>
+            <div id="reader-tests"></div>
+        </div>
+
+        <!-- Test Section: Author Management -->
+        <div class="test-section">
+            <h2>✍️ Kiểm thử Quản lý Tác giả</h2>
+            <div id="author-tests"></div>
+        </div>
+
+        <!-- Test Section: Publisher Management -->
+        <div class="test-section">
+            <h2>🏢 Kiểm thử Quản lý Nhà xuất bản</h2>
+            <div id="publisher-tests"></div>
+        </div>
+
+        <!-- Test Section: Loan Management -->
+        <div class="test-section">
+            <h2>📋 Kiểm thử Quản lý Mượn - Trả</h2>
+            <div id="loan-tests"></div>
+        </div>
+
+        <!-- Test Section: Statistics -->
+        <div class="test-section">
+            <h2>📈 Kiểm thử Thống kê</h2>
+            <div id="stats-tests"></div>
+        </div>
+
+        <!-- Test Section: UI Components -->
+        <div class="test-section">
+            <h2>🎨 Kiểm thử Giao diện</h2>
+            <div id="ui-tests"></div>
+        </div>
+
+        <!-- Test Section: Integration Tests -->
+        <div class="test-section">
+            <h2>🔗 Kiểm thử Tích hợp</h2>
+            <div id="integration-tests"></div>
+        </div>
+    </div>
+
+    <!-- Include the main application files -->
+    <script src="js/data.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/modules/books.js"></script>
+    <script src="js/modules/readers.js"></script>
+    <script src="js/modules/authors.js"></script>
+    <script src="js/modules/publishers.js"></script>
+    <script src="js/modules/loans.js"></script>
+    <script src="js/modules/reports.js"></script>
+
+    <script>
+        // Test Framework
+        class TestFramework {
+            constructor() {
+                this.tests = [];
+                this.results = {
+                    passed: 0,
+                    failed: 0,
+                    warnings: 0,
+                    total: 0
+                };
+            }
+
+            addTest(name, description, testFunction, section = 'general') {
+                this.tests.push({
+                    name,
+                    description,
+                    testFunction,
+                    section,
+                    result: null,
+                    error: null
+                });
+            }
+
+            async runTest(test) {
+                try {
+                    const result = await test.testFunction();
+                    test.result = result;
+                    if (result === true) {
+                        this.results.passed++;
+                    } else if (result === 'warning') {
+                        this.results.warnings++;
+                    } else {
+                        this.results.failed++;
+                    }
+                } catch (error) {
+                    test.result = false;
+                    test.error = error.message;
+                    this.results.failed++;
+                }
+                this.results.total++;
+            }
+
+            async runAllTests() {
+                this.results = {
+                    passed: 0,
+                    failed: 0,
+                    warnings: 0,
+                    total: 0
+                };
+
+                for (const test of this.tests) {
+                    await this.runTest(test);
+                }
+
+                this.displayResults();
+                this.updateSummary();
+            }
+
+            displayResults() {
+                    const sections = [...new Set(this.tests.map(t => t.section))];
+
+                    sections.forEach(section => {
+                                const sectionTests = this.tests.filter(t => t.section === section);
+                                const container = document.getElementById(`${section}-tests`);
+                                if (!container) return;
+
+                                container.innerHTML = '';
+
+                                sectionTests.forEach(test => {
+                                            const testDiv = document.createElement('div');
+                                            testDiv.className = 'test-case';
+
+                                            if (test.result === true) {
+                                                testDiv.classList.add('passed');
+                                            } else if (test.result === 'warning') {
+                                                testDiv.classList.add('warning');
+                                            } else {
+                                                testDiv.classList.add('failed');
+                                            }
+
+                                            const resultText = test.result === true ? 'PASS' :
+                                                test.result === 'warning' ? 'WARNING' : 'FAIL';
+                                            const resultClass = test.result === true ? 'pass' :
+                                                test.result === 'warning' ? 'warning' : 'fail';
+
+                                            testDiv.innerHTML = `
+                            <div class="test-title">${test.name}</div>
+                            <div class="test-description">${test.description}</div>
+                            <div class="test-result ${resultClass}">
+                                ${resultText}
+                                ${test.error ? ` - Lỗi: ${test.error}` : ''}
+                            </div>
+                        `;
+                        
+                        container.appendChild(testDiv);
+                    });
+                });
+            }
+
+            updateSummary() {
+                const summary = document.getElementById('summary');
+                const passRate = ((this.results.passed / this.results.total) * 100).toFixed(1);
+                
+                summary.innerHTML = `
+                    <h3>📊 Tóm tắt kết quả kiểm thử</h3>
+                    <p><strong>Tổng số test:</strong> ${this.results.total}</p>
+                    <p><strong>Thành công:</strong> <span style="color: #4CAF50">${this.results.passed}</span></p>
+                    <p><strong>Thất bại:</strong> <span style="color: #f44336">${this.results.failed}</span></p>
+                    <p><strong>Cảnh báo:</strong> <span style="color: #ff9800">${this.results.warnings}</span></p>
+                    <p><strong>Tỷ lệ thành công:</strong> <span style="color: ${passRate >= 80 ? '#4CAF50' : '#f44336'}">${passRate}%</span></p>
+                `;
+            }
+        }
+
+        const testFramework = new TestFramework();
+
+        // Helper functions
+        function generateTestData() {
+            return {
+                book: {
+                    title: "Test Book " + Date.now(),
+                    authorId: "A0001",
+                    category: "Khoa học",
+                    publisherId: "P0001",
+                    quantity: 5,
+                    location: "Kệ A1"
+                },
+                reader: {
+                    name: "Test Reader " + Date.now(),
+                    email: "test" + Date.now() + "@example.com",
+                    phone: "0123456789",
+                    address: "Test Address"
+                },
+                author: {
+                    name: "Test Author " + Date.now(),
+                    bio: "Test biography"
+                },
+                publisher: {
+                    name: "Test Publisher " + Date.now(),
+                    phone: "0123456789",
+                    email: "publisher" + Date.now() + "@example.com",
+                    address: "Test Publisher Address"
+                }
+            };
+        }
+
+        function clearAllData() {
+            if (confirm('Bạn có chắc chắn muốn xóa tất cả dữ liệu test?')) {
+                localStorage.clear();
+                DataStore.init();
+                alert('Đã xóa tất cả dữ liệu test!');
+            }
+        }
+
+        // DataStore Tests
+        testFramework.addTest(
+            "Khởi tạo DataStore",
+            "Kiểm tra DataStore có khởi tạo đúng không",
+            () => {
+                DataStore.init();
+                const books = DataStore.getAll('books');
+                const categories = DataStore.getCategories();
+                return Array.isArray(books) && Array.isArray(categories) && categories.length > 0;
+            },
+            'datastore'
+        );
+
+        testFramework.addTest(
+            "Tạo ID tự động",
+            "Kiểm tra việc tạo ID tự động cho các entity",
+            () => {
+                const bookId1 = DataStore.getNextId('books');
+                const bookId2 = DataStore.getNextId('books');
+                return bookId1 !== bookId2 && bookId1.startsWith('B') && bookId2.startsWith('B');
+            },
+            'datastore'
+        );
+
+        // Book Management Tests
+        testFramework.addTest(
+            "Thêm sách mới",
+            "Kiểm tra chức năng thêm sách mới",
+            () => {
+                const testData = generateTestData();
+                const author = DataStore.addAuthor(testData.author);
+                const publisher = DataStore.addPublisher(testData.publisher);
+                
+                testData.book.authorId = author.id;
+                testData.book.publisherId = publisher.id;
+                
+                const book = DataStore.addBook(testData.book);
+                return book && book.id && book.title === testData.book.title;
+            },
+            'book'
+        );
+
+        testFramework.addTest(
+            "Cập nhật thông tin sách",
+            "Kiểm tra chức năng cập nhật thông tin sách",
+            () => {
+                const books = DataStore.getAll('books');
+                if (books.length === 0) return 'warning';
+                
+                const book = books[0];
+                const newTitle = "Updated Title " + Date.now();
+                const result = DataStore.updateBook(book.id, { title: newTitle });
+                
+                const updatedBooks = DataStore.getAll('books');
+                const updatedBook = updatedBooks.find(b => b.id === book.id);
+                
+                return result && updatedBook && updatedBook.title === newTitle;
+            },
+            'book'
+        );
+
+        testFramework.addTest(
+            "Xóa sách",
+            "Kiểm tra chức năng xóa sách",
+            () => {
+                const testData = generateTestData();
+                const author = DataStore.addAuthor(testData.author);
+                const publisher = DataStore.addPublisher(testData.publisher);
+                
+                testData.book.authorId = author.id;
+                testData.book.publisherId = publisher.id;
+                
+                const book = DataStore.addBook(testData.book);
+                const beforeCount = DataStore.getAll('books').length;
+                
+                DataStore.deleteBook(book.id);
+                const afterCount = DataStore.getAll('books').length;
+                
+                return afterCount === beforeCount - 1;
+            },
+            'book'
+        );
+
+        // Reader Management Tests
+        testFramework.addTest(
+            "Thêm độc giả mới",
+            "Kiểm tra chức năng thêm độc giả mới",
+            () => {
+                const testData = generateTestData();
+                const reader = DataStore.addReader(testData.reader);
+                return reader && reader.id && reader.name === testData.reader.name;
+            },
+            'reader'
+        );
+
+        testFramework.addTest(
+            "Cập nhật thông tin độc giả",
+            "Kiểm tra chức năng cập nhật thông tin độc giả",
+            () => {
+                const readers = DataStore.getAll('readers');
+                if (readers.length === 0) return 'warning';
+                
+                const reader = readers[0];
+                const newName = "Updated Reader " + Date.now();
+                const result = DataStore.updateReader(reader.id, { name: newName });
+                
+                const updatedReaders = DataStore.getAll('readers');
+                const updatedReader = updatedReaders.find(r => r.id === reader.id);
+                
+                return result && updatedReader && updatedReader.name === newName;
+            },
+            'reader'
+        );
+
+        // Author Management Tests
+        testFramework.addTest(
+            "Thêm tác giả mới",
+            "Kiểm tra chức năng thêm tác giả mới",
+            () => {
+                const testData = generateTestData();
+                const author = DataStore.addAuthor(testData.author);
+                return author && author.id && author.name === testData.author.name;
+            },
+            'author'
+        );
+
+        // Publisher Management Tests
+        testFramework.addTest(
+            "Thêm nhà xuất bản mới",
+            "Kiểm tra chức năng thêm nhà xuất bản mới",
+            () => {
+                const testData = generateTestData();
+                const publisher = DataStore.addPublisher(testData.publisher);
+                return publisher && publisher.id && publisher.name === testData.publisher.name;
+            },
+            'publisher'
+        );
+
+        // Loan Management Tests
+        testFramework.addTest(
+            "Tạo phiếu mượn sách",
+            "Kiểm tra chức năng tạo phiếu mượn sách",
+            () => {
+                const books = DataStore.getAll('books');
+                const readers = DataStore.getAll('readers');
+                
+                if (books.length === 0 || readers.length === 0) return 'warning';
+                
+                const loan = {
+                    bookId: books[0].id,
+                    readerId: readers[0].id,
+                    dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString()
+                };
+                
+                const createdLoan = DataStore.addLoan(loan);
+                return createdLoan && createdLoan.id && createdLoan.status === 'active';
+            },
+            'loan'
+        );
+
+        testFramework.addTest(
+            "Trả sách",
+            "Kiểm tra chức năng trả sách",
+            () => {
+                const loans = DataStore.getAll('loans');
+                const activeLoans = loans.filter(loan => loan.status === 'active');
+                
+                if (activeLoans.length === 0) return 'warning';
+                
+                const loan = activeLoans[0];
+                const result = DataStore.returnBook(loan.id);
+                
+                const updatedLoans = DataStore.getAll('loans');
+                const returnedLoan = updatedLoans.find(l => l.id === loan.id);
+                
+                return result && returnedLoan && returnedLoan.status === 'returned';
+            },
+            'loan'
+        );
+
+        testFramework.addTest(
+            "Kiểm tra sách quá hạn",
+            "Kiểm tra chức năng tìm sách quá hạn",
+            () => {
+                // Tạo một phiếu mượn quá hạn
+                const books = DataStore.getAll('books');
+                const readers = DataStore.getAll('readers');
+                
+                if (books.length === 0 || readers.length === 0) return 'warning';
+                
+                const overdueLoan = {
+                    bookId: books[0].id,
+                    readerId: readers[0].id,
+                    dueDate: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString() // 1 ngày trước
+                };
+                
+                DataStore.addLoan(overdueLoan);
+                const overdueLoans = DataStore.getOverdueLoans();
+                
+                return overdueLoans.length > 0;
+            },
+            'loan'
+        );
+
+        // Statistics Tests
+        testFramework.addTest(
+            "Thống kê sách",
+            "Kiểm tra chức năng thống kê sách",
+            () => {
+                const stats = DataStore.getBookStats();
+                return stats && typeof stats.totalBooks === 'number' && 
+                       typeof stats.availableBooks === 'number' && 
+                       typeof stats.totalTitles === 'number';
+            },
+            'stats'
+        );
+
+        testFramework.addTest(
+            "Top sách được mượn nhiều nhất",
+            "Kiểm tra chức năng thống kê sách được mượn nhiều nhất",
+            () => {
+                const topBooks = DataStore.getMostBorrowedBooks(5);
+                return Array.isArray(topBooks) && topBooks.length >= 0;
+            },
+            'stats'
+        );
+
+        testFramework.addTest(
+            "Top độc giả tích cực",
+            "Kiểm tra chức năng thống kê độc giả tích cực nhất",
+            () => {
+                const topReaders = DataStore.getTopReaders(5);
+                return Array.isArray(topReaders) && topReaders.length >= 0;
+            },
+            'stats'
+        );
+
+        // UI Tests
+        testFramework.addTest(
+            "Kiểm tra UI module tồn tại",
+            "Kiểm tra các module UI có tồn tại không",
+            () => {
+                return typeof UI !== 'undefined' && 
+                       typeof BookModule !== 'undefined' && 
+                       typeof ReaderModule !== 'undefined' &&
+                       typeof AuthorModule !== 'undefined' &&
+                       typeof PublisherModule !== 'undefined' &&
+                       typeof LoanModule !== 'undefined';
+            },
+            'ui'
+        );
+
+        testFramework.addTest(
+            "Kiểm tra hàm tạo bảng",
+            "Kiểm tra chức năng tạo bảng HTML",
+            () => {
+                if (typeof UI === 'undefined' || typeof UI.createTable !== 'function') {
+                    return false;
+                }
+                
+                const headers = ['Cột 1', 'Cột 2'];
+                const rows = [
+                    { id: 1, data: ['Dữ liệu 1', 'Dữ liệu 2'] }
+                ];
+                const actions = [
+                    { text: 'Sửa', onclick: 'test()', class: 'button-secondary' }
+                ];
+                
+                const table = UI.createTable(headers, rows, actions);
+                return typeof table === 'string' && table.includes('<table>');
+            },
+            'ui'
+        );
+
+        // Integration Tests
+        testFramework.addTest(
+            "Quy trình mượn sách hoàn chỉnh",
+            "Kiểm tra quy trình mượn sách từ đầu đến cuối",
+            () => {
+                const testData = generateTestData();
+                
+                // Tạo tác giả và nhà xuất bản
+                const author = DataStore.addAuthor(testData.author);
+                const publisher = DataStore.addPublisher(testData.publisher);
+                
+                // Tạo sách
+                testData.book.authorId = author.id;
+                testData.book.publisherId = publisher.id;
+                const book = DataStore.addBook(testData.book);
+                
+                // Tạo độc giả
+                const reader = DataStore.addReader(testData.reader);
+                
+                // Tạo phiếu mượn
+                const loan = DataStore.addLoan({
+                    bookId: book.id,
+                    readerId: reader.id,
+                    dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString()
+                });
+                
+                // Kiểm tra thống kê
+                const stats = DataStore.getBookStats();
+                
+                return book && reader && loan && stats && 
+                       loan.status === 'active' && 
+                       stats.totalBooks >= testData.book.quantity;
+            },
+            'integration'
+        );
+
+        testFramework.addTest(
+            "Kiểm tra tính toàn vẹn dữ liệu",
+            "Kiểm tra tính toàn vẹn dữ liệu khi thực hiện các thao tác",
+            () => {
+                const books = DataStore.getAll('books');
+                const authors = DataStore.getAll('authors');
+                const publishers = DataStore.getAll('publishers');
+                const readers = DataStore.getAll('readers');
+                const loans = DataStore.getAll('loans');
+                
+                // Kiểm tra tất cả sách đều có tác giả và nhà xuất bản hợp lệ
+                const invalidBooks = books.filter(book => {
+                    const hasAuthor = authors.some(author => author.id === book.authorId);
+                    const hasPublisher = publishers.some(publisher => publisher.id === book.publisherId);
+                    return !hasAuthor || !hasPublisher;
+                });
+                
+                // Kiểm tra tất cả phiếu mượn đều có sách và độc giả hợp lệ
+                const invalidLoans = loans.filter(loan => {
+                    const hasBook = books.some(book => book.id === loan.bookId);
+                    const hasReader = readers.some(reader => reader.id === loan.readerId);
+                    return !hasBook || !hasReader;
+                });
+                
+                return invalidBooks.length === 0 && invalidLoans.length === 0;
+            },
+            'integration'
+        );
+
+        // Function to run all tests
+        async function runAllTests() {
+            await testFramework.runAllTests();
+        }
+
+        // Initialize test data for demonstration
+        function initializeTestData() {
+            // Tạo một số dữ liệu mẫu nếu chưa có
+            const books = DataStore.getAll('books');
+            if (books.length === 0) {
+                const testData = generateTestData();
+                const author = DataStore.addAuthor(testData.author);
+                const publisher = DataStore.addPublisher(testData.publisher);
+                
+                testData.book.authorId = author.id;
+                testData.book.publisherId = publisher.id;
+                DataStore.addBook(testData.book);
+                
+                DataStore.addReader(testData.reader);
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTestData();
+        });
+    </script>
+</body>
+
+</html>

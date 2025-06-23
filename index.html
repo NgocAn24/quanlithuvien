@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Quản lý Thư viện</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Panel - Menu -->
+        <div class="left-panel">
+            <div class="menu">
+                <h2>Quản lý Thư viện</h2>
+                <div class="menu-list">
+                    <span class="menu-item" data-page="books">📚 Quản lý Sách</span>
+                    <span class="menu-item" data-page="readers">👥 Quản lý Độc giả</span>
+                    <span class="menu-item" data-page="authors">✍️ Quản lý Tác giả</span>
+                    <span class="menu-item" data-page="publishers">🏢 Quản lý Nhà xuất bản</span>
+                    <span class="menu-item" data-page="loans">📋 Quản lý Mượn - Trả</span>
+                    <span class="menu-item" data-page="reports">📊 Thống kê & Báo cáo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel - Content -->
+        <div class="right-panel" id="content">
+            <div class="welcome-screen">
+                <h1>Chào mừng đến với Hệ thống Quản lý Thư viện</h1>
+                <p>Vui lòng chọn một mục từ menu bên trái để bắt đầu.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/ui.js"></script>
+
+    <!-- Module Scripts -->
+    <script src="js/modules/books.js"></script>
+    <script src="js/modules/readers.js"></script>
+    <script src="js/modules/authors.js"></script>
+    <script src="js/modules/publishers.js"></script>
+    <script src="js/modules/loans.js"></script>
+    <script src="js/modules/reports.js"></script>
+</body>
+
+</html>
